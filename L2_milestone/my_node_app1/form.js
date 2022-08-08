@@ -55,16 +55,12 @@ const saveUserForm = (event) => {
     dob,
     acceptTermsAndConditions,
   };
-  check = Object.keys(userDetails).length
+  check = Object.keys(userDetails).length;
   userEntries.push(userDetails);
 
-  if(check==5)
-  alert("Record Saved successfully!")
+  if (check == 5) alert("Record Saved successfully!");
 
-  localStorage.setItem(
-    "user-entries",
-    JSON.stringify(userEntries)
-  );
+  localStorage.setItem("user-entries", JSON.stringify(userEntries));
 
   displayEntries();
 

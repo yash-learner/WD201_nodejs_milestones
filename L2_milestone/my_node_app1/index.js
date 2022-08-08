@@ -33,43 +33,43 @@ const lineDetail1 = readline.createInterface({
   output: process.stdout,
 });
 
+function createServer(path) {
+  http
+    .createServer(function (request, response) {
+      let url = request.url;
+      response.writeHeader(200, { "Content-Type": "text/html" });
+      let stream;
+      switch (url) {
+        case "/project":
+          response.write(projectContent);
+          response.end();
+          break;
+        case "/form.js":
+          response.write(scriptContent);
+          response.end();
+          break;
+        case "/main.css":
+          response.writeHeader(200, { "Content-Type": "text/css" });
+          response.write(cssContent);
+          response.end();
+          break;
+        case "/registration":
+          stream = fs.createReadStream(`${path}`);
+          stream.pipe(response);
+          break;
+        default:
+          response.write(homeContent);
+          response.end();
+          break;
+      }
+    })
+    .listen(3000, console.log("server started!"));
+}
+
 lineDetail1.question(
   `Please provide the path for project (input:registration.html) `,
   (path) => {
-    fs.readFile(`${path}`, function (err, registration) {
-      if (err) throw err;
-      registrationContent = registration;
-    });
     lineDetail1.close();
+    createServer(path);
   }
 );
-
-http
-  .createServer(function (request, response) {
-    let url = request.url;
-    response.writeHeader(200, { "Content-Type": "text/html" });
-    switch (url) {
-      case "/project":
-        response.write(projectContent);
-        response.end();
-        break;
-      case "/form.js":
-        response.write(scriptContent);
-        response.end();
-        break;
-      case "/main.css":
-        response.writeHeader(200, { "Content-Type": "text/css" });
-        response.write(cssContent);
-        response.end();
-        break;
-      case "/registration":
-        response.write(registrationContent);
-        response.end();
-        break;
-      default:
-        response.write(homeContent);
-        response.end();
-        break;
-    }
-  })
-  .listen(3000);
