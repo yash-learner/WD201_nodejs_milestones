@@ -31,9 +31,10 @@ const stream_server = http.createServer(function (req, res) {
 
 stream_server.listen(3001);
 
+const readline = require("readline");
 // Reading input from command line
 /*
-const readline = require("readline");
+
 
 const lineDetail = readline.createInterface({
   input: process.stdin,
@@ -47,10 +48,11 @@ lineDetail.question(`Please provide your name - `, (userName) => {
 */
 
 // cli,  fs, streams
+
 const lineDetail1 = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  });
+  input: process.stdin,
+  output: process.stdout,
+});
 
 lineDetail1.question(`Please provide the full file path - `, (path) => {
   const server1 = http.createServer((req, res) => {
@@ -60,5 +62,3 @@ lineDetail1.question(`Please provide the full file path - `, (path) => {
   lineDetail1.close();
   server1.listen(3002);
 });
-
-
