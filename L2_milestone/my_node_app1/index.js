@@ -1,5 +1,6 @@
 const fs = require("fs");
 const http = require("http");
+const readline = require("readline");
 
 let homeContent = "";
 let projectContent = "";
@@ -8,16 +9,12 @@ let scriptContent = "";
 let cssContent = "";
 
 fs.readFile("home.html", function (err, home) {
-  if (err) {
-    throw err;
-  }
+  if (err) throw err;
   homeContent = home;
 });
 
 fs.readFile("project.html", function (err, project) {
-  if (err) {
-    throw err;
-  }
+  if (err) throw err;
   projectContent = project;
 });
 
@@ -31,11 +28,21 @@ fs.readFile("main.css", function (err, main) {
   cssContent = main;
 });
 
-fs.readFile("registration.html", function (err, registration) {
-  if (err) throw err;
-  registrationContent = registration;
+const lineDetail1 = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
 });
 
+lineDetail1.question(
+  `Please provide the path for project (input:registration.html) `,
+  (path) => {
+    fs.readFile(`${path}`, function (err, registration) {
+      if (err) throw err;
+      registrationContent = registration;
+    });
+    lineDetail1.close();
+  }
+);
 
 http
   .createServer(function (request, response) {
@@ -65,4 +72,4 @@ http
         break;
     }
   })
-  .listen(3001);
+  .listen(3000);
