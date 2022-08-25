@@ -1,7 +1,7 @@
 // __tests__/todo.js
 let todoList = require("../todo");
 
-const { all, markAsComplete, add } = todoList();
+const { all, markAsComplete, add, overdue } = todoList();
 /* eslint-disable no-undef */
 describe("Todo List Test Suite", () => {
   test("Should add a new todo", () => {
@@ -34,5 +34,6 @@ describe("Todo List Test Suite", () => {
       ),
     });
     expect(all.length).toEqual(2);
+    overdueItems = overdue();
   });
 });
