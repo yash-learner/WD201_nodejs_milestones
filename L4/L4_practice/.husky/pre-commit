@@ -3,3 +3,4 @@
 
 cd L4/L4_practice
 npm test
+npx lint-staged

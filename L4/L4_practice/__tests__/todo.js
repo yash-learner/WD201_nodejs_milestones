@@ -21,4 +21,8 @@ describe("Todo List Test Suite", () => {
     markAsComplete(0);
     expect(all[0].completed).toEqual(true);
   });
+
+  test("Should return overdue items", () => {
+    expect(all.length).toEqual(1);
+  });
 });
