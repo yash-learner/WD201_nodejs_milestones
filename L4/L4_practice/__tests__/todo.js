@@ -33,5 +33,6 @@ describe("Todo List Test Suite", () => {
         "en-CA"
       ),
     });
+    expect(all.length).toEqual(2);
   });
 });
