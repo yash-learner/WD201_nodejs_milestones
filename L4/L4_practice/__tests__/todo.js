@@ -1,4 +1,3 @@
-// __tests__/todo.js
 let todoList = require("../todo");
 
 const { all, markAsComplete, add, overdue, dueToday } = todoList();
