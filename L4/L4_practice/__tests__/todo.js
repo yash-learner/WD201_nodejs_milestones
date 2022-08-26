@@ -48,4 +48,5 @@ describe("Todo List Test Suite", () => {
     dueTodayItems = dueToday();
     expect(dueTodayItems.length).toBe(2);
   });
+  console.log(all);
 });
